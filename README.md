@@ -9,7 +9,7 @@ Docker is being used to deploy our code.
 https://github.com/NhlamuloChauke/kafka-zensar-project.git
 ```
 
-**To run spring-boot and docker containers(for mysql, kafka, consumer and producer):**
+1. **Run spring-boot and docker containers(for mysql, kafka, consumer and producer):**
 ```
 cd kafka-zensar-project
 cd kafka-consumer-file
@@ -23,11 +23,12 @@ cd ../kafka-zensar-project
 docker-compose up -d kafka-mysql-db
 docker-compose up -d kafka-cluster
 docker-compose build kafka-consumer-file
+docker-compose up -d kafka-consumer-file
 docker-compose build kafka-producer-file
+docker-compose up -d kafka-producer-file
 ```
 
-1. Json file is read from the directory(/data). 
-**Json Content**
+2. Json file is read from the directory(/data)
 ```
 {
  "id":"10", 
@@ -37,5 +38,5 @@ docker-compose build kafka-producer-file
 }
 ```
 
-2. Json data is read from the directory, and the content is pushed to kafka topic with **kafka-producer-file** service.
+3. Json data is read from the directory, and the content is pushed to kafka topic with **kafka-producer-file** service.
    The content is push through REST API.
