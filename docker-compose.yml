@@ -13,17 +13,50 @@ services:
       - 8081-8083:8081-8083       # REST Proxy, Schema Registry, Kafka Connect ports
       - 9581-9585:9581-9585       # JMX Ports
       - 9092:9092                 # Kafka Broker
+    networks:
+      - app_private_net
 
-  kafka-producer-file:
+ kafka-mysql-db:
+   container_name:  kafka-mysql-db
+   image: mysql/mysql-server:5.7
+    environment:
+    MYSQL_DATABASE: root
+    MYSQL_ROOT_PASSWORD: password
+    MYSQL_ROOT_HOST: '%'
+   ports:
+    - "3306:3306"
+   networks:
+    - app_private_net
+   volumes:
+    - ./mysql-init:/docker-entrypoint-initdb.d/:ro
+   restart: always
+
+  kafka-consumer-file:
     image:  kafka-consumer-file
     container_name:  kafka-consumer-file
     build:
-      context: ./kafka-producer-file
+      context: ./kafka-consumer-file
     volumes:
-     - ./user-irods-tool/src/main/resources/config:/src/main/resources/data
+     - ./user-irods-tool/src/main/resources/data:/src/main/resources/data
     ports:
-     - 8084:8084
+     - 9001:9001
     networks:
      - app_private_net
     depends_on:
-     - user-mysql-db
+     - kafka-mysql-db
+
+  kafka-producer-file:
+    image:  kafka-producer-file
+    container_name:  kafka-producer-file
+    build:
+      context: ./kafka-producer-file
+    ports:
+     - 9002:9002
+    networks:
+     - app_private_net
+
+networks:
+  # docker network create app_private_net --attachable
+  app_private_net:
+    external: true
+    
