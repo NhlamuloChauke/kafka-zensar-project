@@ -20,15 +20,13 @@ public class KafkaConsumer {
 
 	@Autowired
 	PersonService personService;
-
-	@KafkaListener(topics = "output-xml-file-topic", groupId = "group_id")
+	
+	@KafkaListener(topics = "person-json-file-topic", groupId = "group_id")
 	public void consume(String message) throws IOException {
 
 		LOG.info("Consumed message =>: " + message);
 
-		// message = message.replace("\\n", "");
-		// message = message.replaceAll("^\"|\"$|\\\\", "");
-
+		//converting json to data object
 		Person person = JsonToObject.processing(Person.class, message);
 
 		// save person

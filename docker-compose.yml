@@ -44,6 +44,7 @@ services:
      - app_private_net
     depends_on:
      - kafka-mysql-db
+     - kafka-cluster
 
   kafka-producer-file:
     image:  kafka-producer-file
@@ -54,6 +55,8 @@ services:
      - 9002:9002
     networks:
      - app_private_net
+    depends_on:
+      - kafka-cluster
 
 networks:
   # docker network create app_private_net --attachable

@@ -26,4 +26,9 @@ public class FileContent {
 		}
 		return fileContent;
 	}
+	
+	public static void main(String[] args) {
+		String filePath = "../data/Person.json";
+		System.out.println(readFileContent(filePath));
+	}
 }

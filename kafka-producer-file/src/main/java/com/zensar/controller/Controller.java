@@ -15,10 +15,13 @@ public class Controller {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    private static final String topic = "output-xml-file-topic";
-    private static final String filePath = "src/main/resources/data/Person.json";
+    //kafka topic
+    private static final String topic = "person-json-file-topic";
     
-    @PostMapping(value="/trigger")
+    //file path and filename
+    private static final String filePath = "../data/Person.json";
+    
+    @PostMapping(value="/send")
     public String sendFileData() throws IOException {
     	
     	//read file from the path 
