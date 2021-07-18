@@ -1,2 +1,41 @@
 # kafka-zensar-project
-Read a file from filesystem. Push the data to Kafka. Read the data from Kafka and persist the data into MongoDB/MySQL
+Read a file from filesystem. Push the data to Kafka. Read the data from Kafka and persist the data into MongoDB/MySQL.
+Docker is being used to deploy our code.
+
+**How to Run our services(kafka-consumer-file and kafka-producer-file)**
+
+**Clone the code**
+```
+https://github.com/NhlamuloChauke/kafka-zensar-project.git
+```
+
+**To run spring-boot and docker containers(for mysql, kafka, consumer and producer):**
+```
+cd kafka-zensar-project
+cd kafka-consumer-file
+mvn clean install
+
+cd ../kafka-zensar-project
+cd kafka-producer-file
+mvn clean install
+
+cd ../kafka-zensar-project
+docker-compose up -d kafka-mysql-db
+docker-compose up -d kafka-cluster
+docker-compose build kafka-consumer-file
+docker-compose build kafka-producer-file
+```
+
+1. Json file is read from the directory(/data). 
+**Json Content**
+```
+{
+ "id":"10", 
+ "gender":"male",
+ "firstname":"John",
+ "lastname":"Doe"
+}
+```
+
+2. Json data is read from the directory, and the content is pushed to kafka topic with **kafka-producer-file** service.
+   The content is push through REST API.
