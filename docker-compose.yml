@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  # this is our kafka cluster.
+  kafka-cluster:
+    image: landoop/fast-data-dev:cp3.3.0
+    environment:
+      ADV_HOST: 127.0.0.1         # Change to 192.168.99.100 if using Docker Toolbox
+      RUNTESTS: 0                 # Disable Running tests so the cluster starts faster
+    ports:
+      - 2181:2181                 # Zookeeper
+      - 3030:3030                 # Landoop UI
+      - 8081-8083:8081-8083       # REST Proxy, Schema Registry, Kafka Connect ports
+      - 9581-9585:9581-9585       # JMX Ports
+      - 9092:9092                 # Kafka Broker
+
+  kafka-producer-file:
+    image:  kafka-consumer-file
+    container_name:  kafka-consumer-file
+    build:
+      context: ./kafka-producer-file
+    volumes:
+     - ./user-irods-tool/src/main/resources/config:/src/main/resources/data
+    ports:
+     - 8084:8084
+    networks:
+     - app_private_net
+    depends_on:
+     - user-mysql-db
