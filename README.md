@@ -4,9 +4,9 @@ Docker is being used to deploy our code.
 
 **How to Run our services(kafka-consumer-file and kafka-producer-file)**
 
-**Clone the code**
+**git clone the code**
 ```
-https://github.com/NhlamuloChauke/kafka-zensar-project.git
+git clone https://github.com/NhlamuloChauke/kafka-zensar-project.git
 ```
 
 1. **Run spring-boot and docker containers(for mysql, kafka, consumer and producer):**
