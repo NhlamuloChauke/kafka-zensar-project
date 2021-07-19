@@ -32,8 +32,13 @@ git clone https://github.com/NhlamuloChauke/kafka-zensar-project.git
 cd kafka-zensar-project
 ls
 
-README.md			data			  kafka-consumer-file		mysql-init
-Zensar Solution Document.pages	      docker-compose.yml		kafka-producer-file
+README.md			
+data			  
+kafka-consumer-file		
+mysql-init
+Zensar Solution Document.pages	      
+docker-compose.yml		
+kafka-producer-file
 
 cd data
 cat Person.json
