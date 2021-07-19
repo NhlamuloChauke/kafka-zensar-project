@@ -58,12 +58,25 @@ cd kafka-producer-file
 mvn clean install
 
 cd ../kafka-zensar-project
-docker-compose up -d kafka-mysql-db
-docker-compose up -d kafka-cluster
-docker-compose build kafka-consumer-file
-docker-compose up -d kafka-consumer-file
-docker-compose build kafka-producer-file
-docker-compose up -d kafka-producer-file
+docker network create docker_default_net ##creating docker network
+docker-compose up -d kafka-mysql-db   ## creating MYSQL docker
+docker-compose up -d kafka            ## creating kafka docker
+docker-compose up -d zookeeper        ## creating zookeeper docker
+
+### create kafka topics
+docker-compose exec kafka bash
+bash-5.1#  
+
+Change the directory to /opt/kafka/bin where you find scripts such as kafka-topics.sh.
+cd /opt/kafka/bin
+
+bash-5.1# cd /opt/kafka/bin
+bash-5.1# kafka-topics.sh --create --topic person-json-file-topic --bootstrap-server localhost:9092
+
+docker-compose build kafka-consumer-file  ## building docker image for our App
+docker-compose up -d kafka-consumer-file  ## running docker for our App
+docker-compose build kafka-producer-file  ## building docker image for our App
+docker-compose up -d kafka-producer-file  ## running docker image for our App
 
 docker ps 
 
@@ -77,7 +90,7 @@ ae0a711e7915   wurstmeister/zookeeper   "/bin/sh -c '/usr/sb…"   54 minutes ag
 3. **Json file is read from the directory(/data)**
 ```
 {
- "id":"10", 
+ "id":"1", 
  "gender":"male",
  "firstname":"John",
  "lastname":"Doe"
@@ -94,7 +107,7 @@ ae0a711e7915   wurstmeister/zookeeper   "/bin/sh -c '/usr/sb…"   54 minutes ag
 
    # get all the persisted data from the database(kafka-consumer-file)
    curl -X GET http://localhost:9091/persons
-   
+
    [{"id":1,"gender":"male","firstname":"John","lastname":"Doe"},
    {"id":2,"gender":"male","firstname":"John","lastname":"Doe"}]
    ```
