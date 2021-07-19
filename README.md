@@ -10,9 +10,9 @@ The content is push through REST API. Read the data from kafka and persist the d
 **Technologies**
 
 Docker
-Spring Boot
-Apache kafka and zookeeper
-databases(mysql and sqlserver
+* Spring Boot
+* Apache kafka and zookeeper
+* Databases(mysql and sqlserver)
 
 **Install**
 
