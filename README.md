@@ -9,7 +9,7 @@ The content is push through REST API. Read the data from kafka and persist the d
 
 **Technologies**
 
-Docker
+* Docker
 * Spring Boot
 * Apache kafka and zookeeper
 * Databases(mysql and sqlserver)
@@ -31,7 +31,6 @@ git clone https://github.com/NhlamuloChauke/kafka-zensar-project.git
 ```
 cd kafka-zensar-project
 ls
-
 README.md			
 data			  
 kafka-consumer-file		
