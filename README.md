@@ -16,9 +16,9 @@ databases(mysql and sqlserver
 
 **Install**
 
-Install JDK java 11
-Install docker
-Eclipse/IDEA/other tools
+* Install JDK java 11
+* Install docker
+* Eclipse/IDEA/other tools
 
 **Running our applications(kafka-consumer-file and kafka-producer-file)**
 
