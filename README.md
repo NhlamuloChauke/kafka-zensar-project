@@ -66,6 +66,12 @@ docker-compose build kafka-producer-file
 docker-compose up -d kafka-producer-file
 
 docker ps 
+
+c39309194d2f   kafka-producer-file      "java -jar /app.jar"     4 minutes ago    Up 4 minutes              0.0.0.0:9002->9002/tcp                               kafka-producer-file
+aa9169ed54cb   kafka-consumer-file      "java -jar /app.jar"     25 minutes ago   Up 25 minutes             0.0.0.0:9001->9001/tcp                               kafka-consumer-file
+056bb9b35d1d   mysql/mysql-server:5.7   "/entrypoint.sh mysq…"   45 minutes ago   Up 45 minutes (healthy)   0.0.0.0:3306->3306/tcp, 33060/tcp                    kafka-mysql-db
+5cf3147bc284   wurstmeister/kafka       "start-kafka.sh"         49 minutes ago   Up 49 minutes             0.0.0.0:9092->9092/tcp                               kafka-zensar-project_kafka_1
+ae0a711e7915   wurstmeister/zookeeper   "/bin/sh -c '/usr/sb…"   54 minutes ago   Up 54 minutes             22/tcp, 2888/tcp, 3888/tcp, 0.0.0.0:2181->2181/tcp   kafka-zensar-project_zookeeper_1
 ```
 
 3. **Json file is read from the directory(/data)**
@@ -88,4 +94,7 @@ docker ps
 
    # get all the persisted data from the database(kafka-consumer-file)
    curl -X GET http://localhost:9091/persons
+   
+   [{"id":1,"gender":"male","firstname":"John","lastname":"Doe"},
+   {"id":2,"gender":"male","firstname":"John","lastname":"Doe"}]
    ```
