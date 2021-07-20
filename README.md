@@ -3,7 +3,7 @@
 This is project is about building the backend applications that uses the spring data JPA, docker, kafka and MySql. In this context,
 our applications will be running on docker.
 
-This project is about reading a file from filesystem(directory (json file). 
+This project is about reading a file from filesystem directory (json file). 
 Json file is read from the directory, and the content is produced to kafka topic. 
 The content is push through REST API. Read the data from kafka and persist the data into MySQL.
 
